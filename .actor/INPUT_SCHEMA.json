@@ -20,7 +20,7 @@
             "title": "Where the job is (location)",
             "type": "array",
             "editor": "stringList",
-            "description": "Type where the job is: a city, state or country, one per line, for example Bangalore, Pune or Mumbai. Cutshort writes Bangalore as Bengaluru (Bangalore), and Gurgaon also finds Gurugram. India finds every job in India, remote-only ones included. Remote here asks for remote jobs. Leave it empty for anywhere.",
+            "description": "Type where the job is: a city, state or country, one per line, for example Bangalore, Pune or Delhi NCR (Delhi, Noida, Gurugram and nearby). Old and new names both work: Bangalore or Bengaluru, Gurgaon or Gurugram. India finds every job in India, remote-only ones included. Remote typed alone asks for remote-only jobs; next to a city it adds nothing. Leave it empty for anywhere.",
             "placeholderValue": "Bangalore",
             "example": [
                 "Bangalore"
@@ -110,11 +110,10 @@
         },
         "experienceYears": {
             "title": "Experience (experienceYears)",
-            "type": "integer",
-            "editor": "number",
-            "unit": "years",
-            "description": "Type your years of experience, for example 3: you get the jobs whose experience range includes it (a job for 2 - 6 years matches 3). Type 0 for jobs open to freshers. Leave it empty for every experience level.",
-            "example": 3,
+            "type": "string",
+            "editor": "textfield",
+            "description": "Type your years of experience: a number such as 3, a range such as 2-5, 5+ for five or more, or fresher. A job is kept when the experience it asks for overlaps yours: 3 keeps a job for 2 - 6 years, 5+ keeps a job for 4 - 8 years. Cutshort states experience on every job. Leave it empty for every experience.",
+            "example": "3",
             "nullable": true
         },
         "minSalaryLakhs": {

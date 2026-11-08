@@ -145,7 +145,7 @@
         {
             "name": "fresher-jobs-on-cutshort",
             "title": "Find fresher and entry-level jobs on Cutshort",
-            "description": "Get the newest Cutshort jobs open to freshers (0 years of experience), with the company, city, pay in lakhs or stipend, skills and link.",
+            "description": "Get the newest Cutshort jobs open to freshers (0 years of experience, typed as fresher), with the company, city, pay in lakhs or stipend, skills and link.",
             "input": {
                 "searchTerms": [],
                 "location": [],
@@ -162,7 +162,7 @@
                 "searchDescriptions": false,
                 "companies": [],
                 "jobUrls": [],
-                "experienceYears": 0
+                "experienceYears": "fresher"
             },
             "seoTitle": "Fresher Jobs on Cutshort, India",
             "seoDescription": "Entry-level and fresher jobs on Cutshort open to 0 years of experience: company, city, pay in lakhs or stipend, skills and link, newest first.",

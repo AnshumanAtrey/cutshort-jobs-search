@@ -17,19 +17,20 @@ Source: https://github.com/AnshumanAtrey/cutshort-jobs-search
 - Newest first by the date Cutshort's own job lists show (the same to the minute on 148 of 148 jobs compared); the job page's own moving date is a second field.
 - Remote as Cutshort says it: remote only (remote), remote friendly (hybrid), office only (onsite).
 - Agency jobs name the client as the company and the agency in its own field.
-- Takes what people type: Bangalore or Bengaluru, Gurgaon or Gurugram, wfh, a pasted Cutshort list link such as cutshort.io/jobs/remote-python-jobs.
+- Takes what people type: Bangalore or Bengaluru, Gurgaon or Gurugram, Delhi NCR, wfh, 2-5 or 5+ years, fresher, a pasted Cutshort list link such as cutshort.io/jobs/remote-python-jobs.
+- A run that finds nothing says which one filter left jobs out and how to loosen it, for example "the salary alone left out 189. To see them, type a lower Salary from or leave it empty."
 - Job link check: each pasted link comes back open, closed or not found.
 
 ## Input keys
 
 - Job titles to find (searchTerms): one per line; a job matches when its title has every word.
-- Where the job is (location): city, state or country: Bangalore, Pune, Gurgaon, India.
+- Where the job is (location): city, state or country: Bangalore, Pune, Delhi NCR, India. Remote alone asks for remote-only jobs; next to a city it adds nothing.
 - Remote or office (workType): remote, hybrid (remote friendly) or onsite.
 - Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days, any time, or your own period.
 - Number of jobs (maxJobs): 100 by default, 0 for every match.
 - Full details (includeDetails): adds the description as text and HTML, and the city and country.
 - Skills or roles (skills): jobs that ask for one of these skills or name it in their title.
-- Experience (experienceYears): your years of experience; jobs whose range includes them.
+- Experience (experienceYears): 3, a range such as 2-5, 5+ (five or more) or fresher; keeps jobs whose experience range overlaps yours.
 - Salary from (minSalaryLakhs): the lowest yearly pay in lakhs (12 means 12 LPA).
 - Funding stage (companyStage): bootstrapped, funded or profitable.
 - Company type (companyType): product or services.
@@ -88,7 +89,7 @@ About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 new
 {
   "searchTerms": ["python developer"],
   "location": ["Bangalore"],
-  "experienceYears": 3,
+  "experienceYears": "3",
   "minSalaryLakhs": 12,
   "maxJobs": 100
 }

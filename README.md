@@ -11,7 +11,7 @@ Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scrap
 - **Cutshort's own filters.** Years of experience, salary from a number of lakhs a year, funding stage (bootstrapped, funded, profitable), product or services company, and no agency jobs, on top of title, city, remote, job type and posting date.
 - **One keyword is enough.** Type a job title and press Start. Leave the form empty for the newest jobs of every kind.
 - **Newest first, read live.** Every job comes from Cutshort at the moment of your run, sorted by the date Cutshort's own job lists show.
-- **Takes what people type.** Bangalore or Bengaluru, Gurgaon or Gurugram, wfh, 12 LPA, fresher, a pasted Cutshort list link or search link.
+- **Takes what people type.** Bangalore or Bengaluru, Gurgaon or Gurugram, Delhi NCR, wfh, 12 LPA, 2-5 or 5+ years, fresher, a pasted Cutshort list link or search link.
 - **Checks job links.** Paste Cutshort job links and each comes back open, closed or not found.
 
 ## How is it different from other Cutshort scrapers?
@@ -74,13 +74,13 @@ Nothing is required. Type a job title and press Start, or press Start with the f
 | Field | What it does |
 |---|---|
 | Job titles to find (`searchTerms`) | One per line. A job matches when its title has every word: frontend also finds Front-End. A pasted Cutshort list or job link works too |
-| Where the job is (`location`) | A city, state or country: Bangalore, Pune, Gurgaon, India. Remote asks for remote jobs |
+| Where the job is (`location`) | A city, state or country: Bangalore, Pune, Delhi NCR, India. Remote alone asks for remote-only jobs; next to a city it adds nothing |
 | Remote or office (`workType`) | remote (Cutshort's remote only), hybrid (remote friendly: remote or the office it names) or onsite |
 | Posted in the last (`postedWithin`) | 24 hours, 3 days, 7 days, 30 days, any time, or your own period such as 48 hours |
 | Number of jobs (`maxJobs`) | How many, newest first: 100 by default, 0 for every match |
 | Full details (`includeDetails`) | Adds the description as text and HTML, and the city and country |
 | Skills or roles (`skills`) | Jobs that ask for one of these skills, or name it in their title: react finds React.js |
-| Experience (`experienceYears`) | Your years of experience: jobs whose range includes them. 0 for freshers |
+| Experience (`experienceYears`) | Your years of experience: 3, a range such as 2-5, 5+ or fresher. Jobs whose experience range overlaps yours |
 | Salary from (`minSalaryLakhs`) | The lowest yearly pay you want, in lakhs: 12 means 12 LPA |
 | Funding stage (`companyStage`) | bootstrapped, funded or profitable |
 | Company type (`companyType`) | product or services |
@@ -97,7 +97,7 @@ Example input:
 {
   "searchTerms": ["python developer"],
   "location": ["Bangalore"],
-  "experienceYears": 3,
+  "experienceYears": "3",
   "minSalaryLakhs": 12,
   "maxJobs": 100
 }
@@ -173,11 +173,15 @@ Type the skill in Skills or roles (`skills`): Cutshort Jobs Scraper finds every 
 
 ### How do I filter by experience or salary in lakhs?
 
-Type your years in Experience (`experienceYears`): Cutshort Jobs Scraper keeps the jobs whose range includes them, 0 for fresher jobs. Type the lowest yearly pay you want in Salary from (`minSalaryLakhs`): 12 keeps the jobs whose pay reaches 12 lakh rupees a year (12 LPA), and a monthly stipend counts twelve times. Jobs that hide their pay, which Cutshort shows as Best in industry, are left out once you set a salary.
+Type your years in Experience (`experienceYears`): a number such as 3, a range such as 2-5, 5+ for five or more, or fresher. Cutshort Jobs Scraper keeps the jobs whose experience range overlaps yours: 3 keeps a job for 2 - 6 years, 5+ a job for 4 - 8 years, and fresher the jobs that start at 0. Type the lowest yearly pay you want in Salary from (`minSalaryLakhs`): 12 keeps the jobs whose pay reaches 12 lakh rupees a year (12 LPA), and a monthly stipend counts twelve times. Jobs that hide their pay, which Cutshort shows as Best in industry, are left out once you set a salary.
 
 ### What does remote, hybrid and onsite mean on Cutshort?
 
-Cutshort marks every job remote only, remote friendly or office only. Cutshort Jobs Scraper returns remote only as remote, remote friendly (the job can be done remotely or from the office it names, as in Remote, Coimbatore) as hybrid, and office only as onsite, with Cutshort's own words in Remote policy (`remotePolicy`). Cutshort's own remote list holds only remote-only jobs, as remote does here. On the 2,000 newest jobs, 16% were remote only and 2% remote friendly.
+Cutshort marks every job remote only, remote friendly or office only. Cutshort Jobs Scraper returns remote only as remote, remote friendly (the job can be done remotely or from the office it names, as in Remote, Coimbatore) as hybrid, and office only as onsite, with Cutshort's own words in Remote policy (`remotePolicy`). Cutshort's own remote list holds only remote-only jobs, as remote does here. On the 2,000 newest jobs, 16% were remote only and 2% remote friendly. Remote typed alone in Where the job is (`location`) asks for remote-only jobs; typed next to a city it adds nothing, since that city's remote-friendly jobs are already in, so to get remote-only jobs set Remote or office (`workType`) to remote.
+
+### Why did my search return no jobs?
+
+When nothing matches, Cutshort Jobs Scraper's message names the one filter that left jobs out and how to loosen it. A search for python developer in Bangalore with 5+ years and a salary from 500 lakhs ended: "No open job matched on Cutshort in 31 s. 225 jobs had your words but not your other filters: the salary alone left out 189. To see them, type a lower Salary from or leave it empty." The `OUTPUT` record also shows how each field of your input was read.
 
 ### Does it need a login or a Cutshort API key?
 
