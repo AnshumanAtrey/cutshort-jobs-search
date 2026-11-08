@@ -41,7 +41,7 @@ Pay per event: $0.027 per 1,000 jobs, with or without the full description, and 
 | Job with details | $0.000027 | One saved job with full details on |
 | Run start | $0.053 | Once when a run starts, and once more for each GB of memory above 1 GB |
 
-The "from" price in Cutshort Jobs Scraper's Apify Store header is the lowest discount-tier price, the GOLD price: $0.017 per 1,000 jobs, without the run start. FREE users (Apify's Free plan) pay $0.000027 a job, BRONZE (Starter) $0.000026, SILVER (Scale) $0.000021, GOLD (Business) $0.000017, and PLATINUM and DIAMOND $0.000016, with or without details. The run start, $0.053, is the same on every plan and is most of the price of a small run: it pays for the job pages a run reads, and a narrow search (one skill, remote only) reads thousands of them for a few dozen jobs.
+The "from" price in Cutshort Jobs Scraper's Apify Store header is the lowest discount-tier price, the GOLD price: $0.017 per 1,000 jobs, without the run start. FREE users (Apify's Free plan) pay $0.000027 a job, BRONZE (Starter) $0.000026, SILVER (Scale) $0.000021, GOLD (Business) and the enterprise tiers above it $0.000017, with or without details. The run start, $0.053, is the same on every plan and is most of the price of a small run: it pays for the job pages a run reads, and a narrow search (one skill, remote only) reads thousands of them for a few dozen jobs.
 
 | Run (Free plan price, run start included) | Cost |
 |---|---|
