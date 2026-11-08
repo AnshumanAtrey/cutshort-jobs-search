@@ -77,7 +77,7 @@ Nothing is required. Type a job title and press Start, or press Start with the f
 | Job titles to find (`searchTerms`) | One per line. A job matches when its title has every word: frontend also finds Front-End. A pasted Cutshort list or job link works too |
 | Where the job is (`location`) | A city, state or country: Bangalore, Pune, Delhi NCR, India. Remote alone asks for remote-only jobs; next to a city it adds nothing |
 | Remote or office (`workType`) | remote (Cutshort's remote only), hybrid (remote friendly: remote or the office it names) or onsite |
-| Posted in the last (`postedWithin`) | 24 hours, 3 days, 7 days, 30 days, any time, or your own period such as 48 hours |
+| Posted in the last (`postedWithin`) | 24 hours, 3 days, 7 days, 30 days (the default), any time, or your own period such as 48 hours |
 | Number of jobs (`maxJobs`) | How many, newest first: 100 by default, 0 for every match |
 | Full details (`includeDetails`) | Adds the description as text and HTML, and the city and country |
 | Skills or roles (`skills`) | Jobs that ask for one of these skills, or name it in their title: react finds React.js |

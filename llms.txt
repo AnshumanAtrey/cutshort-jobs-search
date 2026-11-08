@@ -26,7 +26,7 @@ Source: https://github.com/AnshumanAtrey/cutshort-jobs-search
 - Job titles to find (searchTerms): one per line; a job matches when its title has every word.
 - Where the job is (location): city, state or country: Bangalore, Pune, Delhi NCR, India. Remote alone asks for remote-only jobs; next to a city it adds nothing.
 - Remote or office (workType): remote, hybrid (remote friendly) or onsite.
-- Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days, any time, or your own period.
+- Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days (the default), any time, or your own period.
 - Number of jobs (maxJobs): 100 by default, 0 for every match.
 - Full details (includeDetails): adds the description as text and HTML, and the city and country.
 - Skills or roles (skills): jobs that ask for one of these skills or name it in their title.
