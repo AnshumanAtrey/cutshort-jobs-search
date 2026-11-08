@@ -1,5 +1,7 @@
 {
     "$comment": "Listing metadata, applied by scripts/store-metadata.mjs in CI (manager/rules/SEO.md). Add actorId after the first CI deploy creates the actor, so CI updates it by ID and a rename of name in actor.json keeps the same actor. isPublic stays false until the priced proof run on Apify.",
+    "actorId": "h3QxK3jk4snxnJMwp",
+    "actorId$comment": "Created 2026-11-08 by the first apify push (BRIEF-3: GitHub Actions locked, owner-approved push from a fresh clone of main); CI and store-metadata.mjs update this actor by ID from now on.",
     "seoTitle": "Cutshort Jobs Scraper - Salary, Skills, Experience",
     "seoDescription": "Search every Cutshort job in India by title, skill, city and years of experience. Get pay in lakhs, skills, funding stage and links, newest first.",
     "exampleRunInput": {
