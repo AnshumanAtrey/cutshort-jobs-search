@@ -1,0 +1,564 @@
+{
+    "actorSpecification": 1,
+    "name": "cutshort-jobs-search",
+    "title": "Cutshort Jobs Scraper & API - India Startup & Tech Jobs, Salary",
+    "description": "Cutshort jobs scraper and API for every live job on cutshort.io, searched live by job title, skill, city, remote, experience and salary in lakhs, newest first. Every row has skills, experience, pay in INR (LPA), funding stage and company type. No login or Cutshort API key.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "categories": [
+        "JOBS",
+        "LEAD_GENERATION",
+        "OPEN_SOURCE"
+    ],
+    "input": "./INPUT_SCHEMA.json",
+    "output": "./output_schema.json",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "minMemoryMbytes": 512,
+    "maxMemoryMbytes": 4096,
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Cutshort jobs",
+            "description": "One row per job, newest first: title, company, locations, remote or office, job type, pay as shown and as numbers, experience, skills, funding stage, company type and size, posting dates and links; with details on, also the description and the city and country. The run summary is the OUTPUT record, not a row.",
+            "fields": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job title (title)",
+                        "description": "The job title as the company wrote it on Cutshort.",
+                        "example": "Events & Operations Executive"
+                    },
+                    "company": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company name (company)",
+                        "description": "The hiring company as Cutshort shows it. For a job an agency posted for a client, the client's name, as the agency typed it.",
+                        "example": "TorqWars"
+                    },
+                    "location": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Main location (location)",
+                        "description": "The first city of the job, as Cutshort writes it: Bengaluru (Bangalore), Pune, Gurugram. Remote only for a job with no office.",
+                        "example": "Mumbai"
+                    },
+                    "otherLocations": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "title": "Other locations (otherLocations)",
+                        "description": "Every other city the job names.",
+                        "example": [
+                            "Pune",
+                            "Hyderabad"
+                        ],
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "workType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Remote or office (workType)",
+                        "description": "remote for a job Cutshort marks remote only, hybrid for remote friendly (remote, or the office it names), onsite for neither.",
+                        "example": "onsite"
+                    },
+                    "employmentType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job type (employmentType)",
+                        "description": "full-time or intern, the two job types Cutshort has; its full time also covers contract roles.",
+                        "example": "full-time"
+                    },
+                    "salary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay as shown (salary)",
+                        "description": "The pay as the job page shows it, in rupees: lakhs a year (L / yr) or a monthly stipend (/ mo). (ESOP available) when the company offers stock options. Empty when the company hides its pay, which Cutshort shows as Best in industry.",
+                        "example": "₹3.2L - ₹6L / yr"
+                    },
+                    "postedAt": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Posted on (postedAt)",
+                        "description": "When the job was posted on Cutshort, or reopened after it closed, in UTC: the date Cutshort's own job lists show and sort by (the datePosted of its JobPosting markup). The newest-first order and the Posted in the last filter use it.",
+                        "example": "2026-11-06T04:16:34.433Z"
+                    },
+                    "jobUrl": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job link (jobUrl)",
+                        "description": "The job's page on Cutshort.",
+                        "example": "https://cutshort.io/job/Events-Operations-Executive-Mumbai-TorqWars-PQmAGhw4"
+                    },
+                    "applyUrl": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Apply link (applyUrl)",
+                        "description": "Where to apply: the job's page, which holds Cutshort's apply button. Empty for a checked link that is closed or not found.",
+                        "example": "https://cutshort.io/job/Events-Operations-Executive-Mumbai-TorqWars-PQmAGhw4"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Still open? (status)",
+                        "description": "open for every search result (read live during the run). For a checked link: open, closed (the company closed or deleted the job) or not found.",
+                        "example": "open"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "title": "Job site (platform)",
+                        "description": "The site the job came from: always cutshort here.",
+                        "example": "cutshort"
+                    },
+                    "companySlug": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company page name (companySlug)",
+                        "description": "The company's page on Cutshort: the name in cutshort.io/company/<companySlug>. Empty for a client an agency hires for.",
+                        "example": "jobs-at-torqwars-45-ERsD3zeF"
+                    },
+                    "companyWebsite": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company website (companyWebsite)",
+                        "description": "The website the company gives on its Cutshort page.",
+                        "example": "https://torqwars.com"
+                    },
+                    "jobId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job ID (jobId)",
+                        "description": "Cutshort's 8-character ID of the job, the end of its link.",
+                        "example": "PQmAGhw4"
+                    },
+                    "checkedAt": {
+                        "type": "string",
+                        "title": "Checked at (checkedAt)",
+                        "description": "When the run read the job, in UTC.",
+                        "example": "2026-11-08T01:25:39+00:00"
+                    },
+                    "skills": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "title": "Skills asked for (skills)",
+                        "description": "The skills the company tagged the job with on Cutshort.",
+                        "example": [
+                            "Event Management",
+                            "Logistics",
+                            "Vendor Management"
+                        ],
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "experienceMin": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Experience from (experienceMin)",
+                        "description": "The fewest years of experience the job asks for, in years.",
+                        "example": 1
+                    },
+                    "experienceMax": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Experience up to (experienceMax)",
+                        "description": "The most years of experience the job asks for, in years.",
+                        "example": 4
+                    },
+                    "salaryMin": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Lowest pay (salaryMin)",
+                        "description": "The lowest pay as a number, in the currency and period beside it: 320000 is 3.2 lakh rupees a year. Empty when the pay is hidden or shown as Upto.",
+                        "example": 320000
+                    },
+                    "salaryMax": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Highest pay (salaryMax)",
+                        "description": "The highest pay as a number, in the currency and period beside it.",
+                        "example": 600000
+                    },
+                    "salaryCurrency": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay currency (salaryCurrency)",
+                        "description": "The currency code of the pay numbers, INR for nearly every job.",
+                        "example": "INR"
+                    },
+                    "salaryPeriod": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay period (salaryPeriod)",
+                        "description": "year for a yearly salary, month for a monthly stipend (internships).",
+                        "example": "year"
+                    },
+                    "remotePolicy": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Remote policy (remotePolicy)",
+                        "description": "Cutshort's own words for a job that can be done remotely: Remote only or Remote friendly. Empty for an office job.",
+                        "example": "Remote friendly"
+                    },
+                    "companyType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company type (companyType)",
+                        "description": "Product, Services, or Products & Services, as the company describes itself on Cutshort.",
+                        "example": "Product"
+                    },
+                    "companySize": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company size (companySize)",
+                        "description": "The number of employees as a band, such as 20-100 or 1000-5000.",
+                        "example": "20-100"
+                    },
+                    "companyStage": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Funding stage (companyStage)",
+                        "description": "Bootstrapped, Raised funding or Profitable, as the company states it on Cutshort.",
+                        "example": "Raised funding"
+                    },
+                    "companyFounded": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Year founded (companyFounded)",
+                        "description": "The year the company was founded.",
+                        "example": 2017
+                    },
+                    "agency": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Posted by agency (agency)",
+                        "description": "The recruitment or staffing agency that posted the job for its client. Empty when the company posted it itself.",
+                        "example": "Inceptigon Solutions Pty Limited"
+                    },
+                    "offersEquity": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "title": "Stock options? (offersEquity)",
+                        "description": "true when the job says ESOP available. Empty when it does not say.",
+                        "example": true
+                    },
+                    "lastActiveAt": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Last active on (lastActiveAt)",
+                        "description": "When the company last showed it is still hiring, in UTC: the date the job's own page shows as Posted. It moves forward on active jobs, so it is later than postedAt on most of them, by over a week on about a third.",
+                        "example": "2026-11-06T04:16:34.526Z"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job description (description)",
+                        "description": "The job description as plain text, with details on.",
+                        "example": "About TorqWars\nTorqWars is building India's competitive RC racing."
+                    },
+                    "descriptionHtml": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Description as HTML (descriptionHtml)",
+                        "description": "The job description as the company wrote it in HTML, with details on.",
+                        "example": "<p>About TorqWars</p><p>TorqWars is building India's competitive RC racing."
+                    },
+                    "city": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job's city (city)",
+                        "description": "The first city of the job, with details on. Empty for a remote-only job.",
+                        "example": "Mumbai"
+                    },
+                    "country": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job's country (country)",
+                        "description": "The first place's country, with details on: India for nearly every job, and for remote-only jobs, which name none.",
+                        "example": "India"
+                    },
+                    "countryCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Country code (countryCode)",
+                        "description": "The two-letter code of that country, with details on.",
+                        "example": "IN"
+                    }
+                }
+            },
+            "views": {
+                "jobs": {
+                    "title": "Jobs",
+                    "description": "One row per job: what it is, where, remote or not, the pay, the experience asked for and when it was first posted, with its link.",
+                    "transformation": {
+                        "fields": [
+                            "title",
+                            "company",
+                            "location",
+                            "workType",
+                            "salary",
+                            "experienceMin",
+                            "experienceMax",
+                            "postedAt",
+                            "jobUrl"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "title": {
+                                "label": "Job title (title)",
+                                "format": "text"
+                            },
+                            "company": {
+                                "label": "Company name (company)",
+                                "format": "text"
+                            },
+                            "location": {
+                                "label": "Main location (location)",
+                                "format": "text"
+                            },
+                            "workType": {
+                                "label": "Remote or office (workType)",
+                                "format": "text"
+                            },
+                            "salary": {
+                                "label": "Pay as shown (salary)",
+                                "format": "text"
+                            },
+                            "experienceMin": {
+                                "label": "Experience from (experienceMin)",
+                                "format": "number"
+                            },
+                            "experienceMax": {
+                                "label": "Experience up to (experienceMax)",
+                                "format": "number"
+                            },
+                            "postedAt": {
+                                "label": "Posted on (postedAt)",
+                                "format": "date"
+                            },
+                            "jobUrl": {
+                                "label": "Job link (jobUrl)",
+                                "format": "link"
+                            }
+                        }
+                    }
+                },
+                "details": {
+                    "title": "Details",
+                    "description": "Skills, description, pay as numbers, funding stage, company type and size, the agency, and every other field of each job.",
+                    "transformation": {
+                        "fields": [
+                            "title",
+                            "company",
+                            "skills",
+                            "description",
+                            "employmentType",
+                            "salaryMin",
+                            "salaryMax",
+                            "salaryCurrency",
+                            "salaryPeriod",
+                            "companyStage",
+                            "companyType",
+                            "companySize",
+                            "companyFounded",
+                            "agency",
+                            "offersEquity",
+                            "remotePolicy",
+                            "otherLocations",
+                            "lastActiveAt",
+                            "applyUrl",
+                            "companySlug",
+                            "companyWebsite",
+                            "jobId",
+                            "status",
+                            "checkedAt"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "title": {
+                                "label": "Job title (title)",
+                                "format": "text"
+                            },
+                            "company": {
+                                "label": "Company name (company)",
+                                "format": "text"
+                            },
+                            "skills": {
+                                "label": "Skills asked for (skills)",
+                                "format": "array"
+                            },
+                            "description": {
+                                "label": "Job description (description)",
+                                "format": "text"
+                            },
+                            "employmentType": {
+                                "label": "Job type (employmentType)",
+                                "format": "text"
+                            },
+                            "salaryMin": {
+                                "label": "Lowest pay (salaryMin)",
+                                "format": "number"
+                            },
+                            "salaryMax": {
+                                "label": "Highest pay (salaryMax)",
+                                "format": "number"
+                            },
+                            "salaryCurrency": {
+                                "label": "Pay currency (salaryCurrency)",
+                                "format": "text"
+                            },
+                            "salaryPeriod": {
+                                "label": "Pay period (salaryPeriod)",
+                                "format": "text"
+                            },
+                            "companyStage": {
+                                "label": "Funding stage (companyStage)",
+                                "format": "text"
+                            },
+                            "companyType": {
+                                "label": "Company type (companyType)",
+                                "format": "text"
+                            },
+                            "companySize": {
+                                "label": "Company size (companySize)",
+                                "format": "text"
+                            },
+                            "companyFounded": {
+                                "label": "Year founded (companyFounded)",
+                                "format": "number"
+                            },
+                            "agency": {
+                                "label": "Posted by agency (agency)",
+                                "format": "text"
+                            },
+                            "offersEquity": {
+                                "label": "Stock options? (offersEquity)",
+                                "format": "boolean"
+                            },
+                            "remotePolicy": {
+                                "label": "Remote policy (remotePolicy)",
+                                "format": "text"
+                            },
+                            "otherLocations": {
+                                "label": "Other locations (otherLocations)",
+                                "format": "array"
+                            },
+                            "lastActiveAt": {
+                                "label": "Last active on (lastActiveAt)",
+                                "format": "date"
+                            },
+                            "applyUrl": {
+                                "label": "Apply link (applyUrl)",
+                                "format": "link"
+                            },
+                            "companySlug": {
+                                "label": "Company page name (companySlug)",
+                                "format": "text"
+                            },
+                            "companyWebsite": {
+                                "label": "Company website (companyWebsite)",
+                                "format": "link"
+                            },
+                            "jobId": {
+                                "label": "Job ID (jobId)",
+                                "format": "text"
+                            },
+                            "status": {
+                                "label": "Still open? (status)",
+                                "format": "text"
+                            },
+                            "checkedAt": {
+                                "label": "Checked at (checkedAt)",
+                                "format": "date"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "keyValueStore": {
+            "actorKeyValueStoreSchemaVersion": 1,
+            "title": "Run summary",
+            "description": "The OUTPUT record: how many Cutshort jobs were read and matched, how many were saved, the checked links, the notes about how the input was read and the settings used.",
+            "collections": {
+                "summary": {
+                    "title": "Run summary (OUTPUT)",
+                    "description": "Status, message, counts of jobs read, matched and saved, checked links, notes and settings.",
+                    "key": "OUTPUT"
+                }
+            }
+        }
+    }
+}

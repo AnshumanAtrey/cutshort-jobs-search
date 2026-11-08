@@ -1,0 +1,147 @@
+# Cutshort Jobs Scraper & API - India Startup & Tech Jobs, Salary
+
+> Cutshort jobs scraper and API for every live job on cutshort.io, searched live by job title, skill, city, remote, experience and salary in lakhs, newest first.
+
+## Summary
+
+Cutshort Jobs Search is an Apify actor that searches every live job on Cutshort (cutshort.io), India's hiring site for tech and startup jobs, and returns one row per job, newest first: title, company, city, remote or office, job type, pay as shown and as numbers in INR (LPA), experience range in years, skills, funding stage, company type and size, posting dates and link. Cutshort listed 44,962 open jobs on 2026-11-08, about 1,100 of them first posted in the last 30 days and about 8,500 in the last 12 months. It reads Cutshort's public job index and job pages live at run time, with no login and no Cutshort API key. 89% of the 2,000 newest jobs show their pay, and every row carries the skills and the experience asked for.
+
+Store: https://apify.com/anshumanatrey/cutshort-jobs-search
+Source: https://github.com/AnshumanAtrey/cutshort-jobs-search
+
+## Key features
+
+- Every live job on Cutshort, matched by title words against all of them, not one job list page of a skill (which holds its newest 400).
+- Skills, experience range, pay as shown and as numbers, funding stage, company type and size on every row at no extra price.
+- Cutshort's own filters: years of experience, salary from a number of lakhs a year, funding stage, product or services company, no agency jobs.
+- Newest first by the date Cutshort's own job lists show (the same to the minute on 148 of 148 jobs compared); the job page's own moving date is a second field.
+- Remote as Cutshort says it: remote only (remote), remote friendly (hybrid), office only (onsite).
+- Agency jobs name the client as the company and the agency in its own field.
+- Takes what people type: Bangalore or Bengaluru, Gurgaon or Gurugram, wfh, a pasted Cutshort list link such as cutshort.io/jobs/remote-python-jobs.
+- Job link check: each pasted link comes back open, closed or not found.
+
+## Input keys
+
+- Job titles to find (searchTerms): one per line; a job matches when its title has every word.
+- Where the job is (location): city, state or country: Bangalore, Pune, Gurgaon, India.
+- Remote or office (workType): remote, hybrid (remote friendly) or onsite.
+- Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days, any time, or your own period.
+- Number of jobs (maxJobs): 100 by default, 0 for every match.
+- Full details (includeDetails): adds the description as text and HTML, and the city and country.
+- Skills or roles (skills): jobs that ask for one of these skills or name it in their title.
+- Experience (experienceYears): your years of experience; jobs whose range includes them.
+- Salary from (minSalaryLakhs): the lowest yearly pay in lakhs (12 means 12 LPA).
+- Funding stage (companyStage): bootstrapped, funded or profitable.
+- Company type (companyType): product or services.
+- No agency jobs (excludeAgencies): leaves out jobs an agency posted for a client.
+- Leave out words (excludeTerms): drops jobs whose title has these words.
+- Job type (employmentType): full-time or intern.
+- Match descriptions (searchDescriptions): finds your words in the description too.
+- Only these companies (companies): a company name or a Cutshort company link.
+- Job links to check (jobUrls): checks links instead of searching.
+
+## Pricing
+
+PAY_PER_EVENT model, platform usage included, no run fee:
+
+- Job: $0.0011 per saved job ($1.10 per 1,000), and per checked link that is closed or not found
+- Job with details: $0.00115 per saved job with full details on ($1.15 per 1,000)
+
+Cutshort Jobs Scraper's Apify Store header, "from $0.88 / 1,000 jobs", shows the lowest discount-tier price: the GOLD price. FREE and BRONZE users (Apify's Free and Starter plans) pay the base prices above, $0.0011 a job and $0.00115 with details; SILVER (Scale) pays 10% less, $0.00099 and $0.001035; GOLD (Business) and above pay 20% less, $0.00088 and $0.00092.
+
+Typical costs (Free and Starter price):
+
+- 100 newest jobs: $0.11
+- 100 jobs with full descriptions: $0.115
+- 1,000 jobs: $1.10
+
+Apify's free $5 monthly credit covers about 4,500 jobs.
+
+## Speed
+
+About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 newest jobs in 16 to 23 s, python developer in 16 s, and 2,000 jobs in 284 s (7 jobs a second). A skill is read through Cutshort's list of that skill: golang, 100 jobs in 36 s. A search that several of Cutshort's own filters narrow reads more jobs: up to 5,000 in one run.
+
+## How to call it
+
+- Apify API: POST https://api.apify.com/v2/acts/anshumanatrey~cutshort-jobs-search/run-sync-get-dataset-items with the input as JSON and the header Authorization: Bearer <APIFY_TOKEN>. It returns the rows and waits up to 300 seconds, so start bigger runs (every match) with a client.
+- Python and JavaScript: the apify-client package, actor anshumanatrey/cutshort-jobs-search.
+- n8n: the Apify node, Run an Actor and get dataset. Make: the Apify app's Run an Actor and Get Dataset Items modules.
+- MCP: https://mcp.apify.com?tools=anshumanatrey/cutshort-jobs-search, signed in with Apify or with Authorization: Bearer <APIFY_TOKEN>.
+
+## When to use
+
+- The user wants jobs from Cutshort, a Cutshort jobs API, or India tech and startup jobs with salary in lakhs.
+- The user wants jobs by skill, years of experience, pay or company funding stage in India.
+- The user wants a daily feed of new jobs on Cutshort, or remote jobs in India.
+- The user wants every open job of one company that hires on Cutshort.
+- The user wants to check whether Cutshort job links are still open.
+
+## When NOT to use
+
+- The user needs the pay band Cutshort keeps but does not show, or the name of the person who posted a job: this actor returns what the job page shows and leaves people out.
+- The user needs jobs from other Indian job sites in one run: use a multi-site actor or the sibling actors for each site.
+- The user needs every one of Cutshort's 44,962 jobs often: a full read takes about 95 minutes at the pace Cutshort answers.
+
+## Sample input
+
+```json
+{
+  "searchTerms": ["python developer"],
+  "location": ["Bangalore"],
+  "experienceYears": 3,
+  "minSalaryLakhs": 12,
+  "maxJobs": 100
+}
+```
+
+## Sample output (one record)
+
+```json
+{
+  "title": "Events & Operations Executive",
+  "company": "TorqWars",
+  "location": "Mumbai",
+  "workType": "onsite",
+  "employmentType": "full-time",
+  "salary": "₹3.2L - ₹6L / yr",
+  "postedAt": "2026-11-06T04:16:34.433Z",
+  "jobUrl": "https://cutshort.io/job/Events-Operations-Executive-Mumbai-TorqWars-PQmAGhw4",
+  "status": "open",
+  "platform": "cutshort",
+  "jobId": "PQmAGhw4",
+  "skills": ["Event Management", "Logistics", "Vendor Management", "Event production"],
+  "experienceMin": 1,
+  "experienceMax": 4,
+  "salaryMin": 320000,
+  "salaryMax": 600000,
+  "salaryCurrency": "INR",
+  "salaryPeriod": "year",
+  "companyType": "Products & Services",
+  "companySize": "0-20",
+  "companyStage": "Raised funding",
+  "companyFounded": 2026,
+  "agency": null,
+  "lastActiveAt": "2026-11-06T04:16:34.526Z"
+}
+```
+
+## Differentiators vs alternatives
+
+- vs getascraper/cutshort-scraper (266 users in 30 days): searches every job by title instead of one skill page's newest 400, filters by experience, salary and funding stage, and its posting-date filter works on every search; it costs $0.0011 a job against $0.0013 on the free plan.
+- vs memo23/cutshort-jobs-scraper: no $0.05 run fee, $0.0011 a job against $0.0018, and the same live title search.
+- vs multi-site India job actors: deeper Cutshort fields (skills, experience, funding stage, company type and size) and every Cutshort job.
+
+## Documentation
+
+- Apify Store: https://apify.com/anshumanatrey/cutshort-jobs-search
+- GitHub repo: https://github.com/AnshumanAtrey/cutshort-jobs-search
+- Issues / feedback: GitHub Issues on the above repo
+- License: MIT
+
+## Maintainer
+
+Anshuman Atrey, builder of a portfolio of data and OSINT actors on Apify Store, https://github.com/AnshumanAtrey, https://linkedin.com/in/anshumanatrey.
+
+## Last updated
+
+2026-11-08

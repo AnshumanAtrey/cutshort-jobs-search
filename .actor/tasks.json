@@ -1,0 +1,315 @@
+{
+    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. options follow defaultRunOptions in store.json.",
+    "options": {
+        "build": "latest",
+        "memoryMbytes": 1024,
+        "timeoutSecs": 3600
+    },
+    "tasks": [
+        {
+            "name": "cutshort-jobs-last-24-hours",
+            "title": "Find the newest Cutshort jobs posted in the last 24 hours",
+            "description": "Get the 100 newest jobs first posted on Cutshort in the last day, with the company, city, pay in lakhs, experience asked for, skills and link. Set Number of jobs to 0 to get every one, and schedule it daily for a fresh feed of India tech and startup jobs.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "24 hours",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "New Cutshort Jobs in the Last 24 Hours",
+            "seoDescription": "The newest jobs first posted on Cutshort in the last day, with company, city, pay in lakhs, skills and link. Run it daily for a fresh India jobs feed.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "remote-jobs-on-cutshort",
+            "title": "Find remote jobs on Cutshort",
+            "description": "Get the newest remote-only jobs on Cutshort, with the company, pay in lakhs, experience, skills, funding stage and link. Remote only is how Cutshort marks a job with no office.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [
+                    "remote"
+                ],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "Remote Jobs on Cutshort, India",
+            "seoDescription": "Search Cutshort for remote-only jobs at Indian startups and tech companies: pay in lakhs, experience, skills, funding stage and link, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "python-developer-jobs-bangalore",
+            "title": "Find python developer jobs in Bangalore on Cutshort",
+            "description": "Get the newest python developer jobs in Bengaluru (Bangalore) on Cutshort, with the company, pay in lakhs, the experience asked for, skills and link.",
+            "input": {
+                "searchTerms": [
+                    "python developer"
+                ],
+                "location": [
+                    "Bangalore"
+                ],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "Python Developer Jobs in Bangalore on Cutshort",
+            "seoDescription": "The newest python developer jobs in Bengaluru on Cutshort with pay in lakhs, years of experience, skills and company funding stage, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "react-jobs-on-cutshort",
+            "title": "Find every Cutshort job that asks for React",
+            "description": "Get the newest jobs on Cutshort that list React as a skill or name it in the title, with pay in lakhs, experience, company and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [
+                    "react"
+                ],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "React Developer Jobs on Cutshort",
+            "seoDescription": "Cutshort jobs that ask for React, as a skill or in the title: pay in lakhs, years of experience, company, funding stage and job link, newest first.",
+            "inputSchemaFields": [
+                "skills",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "fresher-jobs-on-cutshort",
+            "title": "Find fresher and entry-level jobs on Cutshort",
+            "description": "Get the newest Cutshort jobs open to freshers (0 years of experience), with the company, city, pay in lakhs or stipend, skills and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": [],
+                "experienceYears": 0
+            },
+            "seoTitle": "Fresher Jobs on Cutshort, India",
+            "seoDescription": "Entry-level and fresher jobs on Cutshort open to 0 years of experience: company, city, pay in lakhs or stipend, skills and link, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "experienceYears",
+                "postedWithin",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "internships-on-cutshort",
+            "title": "Find internships on Cutshort",
+            "description": "Get the newest internships on Cutshort, with the company, city, monthly stipend, skills and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [
+                    "intern"
+                ],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "Internships on Cutshort with Stipend",
+            "seoDescription": "The newest internships on Cutshort at Indian startups: company, city or remote, monthly stipend in rupees, skills and job link, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "employmentType",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "funded-startup-jobs-20-lakhs",
+            "title": "Find funded startup jobs paying 20 lakhs or more",
+            "description": "Get the newest jobs on Cutshort at funded startups whose pay reaches 20 lakh rupees a year, with the experience asked for, skills, company size and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [
+                    "funded"
+                ],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": [],
+                "minSalaryLakhs": 20
+            },
+            "seoTitle": "Funded Startup Jobs Paying 20 LPA or More",
+            "seoDescription": "Cutshort jobs at funded startups with pay of 20 lakhs a year or more: years of experience, skills, company size, city and job link, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "minSalaryLakhs",
+                "companyStage",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "product-company-jobs-pune",
+            "title": "Find product company jobs in Pune on Cutshort",
+            "description": "Get the newest jobs at product companies in Pune on Cutshort, with pay in lakhs, experience, skills, funding stage and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [
+                    "Pune"
+                ],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [
+                    "product"
+                ],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "Product Company Jobs in Pune on Cutshort",
+            "seoDescription": "Jobs at product companies in Pune on Cutshort: pay in lakhs, years of experience, skills, funding stage, company size and job link, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "companyType",
+                "maxJobs"
+            ],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "cutshort-jobs-with-descriptions",
+            "title": "Get Cutshort jobs with full descriptions",
+            "description": "Get the newest Cutshort jobs with the full description as text and HTML, plus skills, experience, pay in lakhs, funding stage and link.",
+            "input": {
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": true,
+                "skills": [],
+                "companyStage": [],
+                "companyType": [],
+                "excludeAgencies": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
+            },
+            "seoTitle": "Cutshort Jobs with Full Descriptions",
+            "seoDescription": "The newest Cutshort jobs with the full job description, skills, years of experience, pay in lakhs, funding stage and company size, newest first.",
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "postedWithin",
+                "maxJobs",
+                "includeDetails"
+            ],
+            "datasetView": "details"
+        }
+    ]
+}

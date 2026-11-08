@@ -1,0 +1,81 @@
+{
+    "$comment": "Listing metadata, applied by scripts/store-metadata.mjs in CI (manager/rules/SEO.md). Add actorId after the first CI deploy creates the actor, so CI updates it by ID and a rename of name in actor.json keeps the same actor. isPublic stays false until the priced proof run on Apify.",
+    "seoTitle": "Cutshort Jobs Scraper - Salary, Skills, Experience",
+    "seoDescription": "Search every Cutshort job in India by title, skill, city and years of experience. Get pay in lakhs, skills, funding stage and links, newest first.",
+    "exampleRunInput": {
+        "searchTerms": [
+            "python developer"
+        ]
+    },
+    "actorPermissionLevel": "LIMITED_PERMISSIONS",
+    "isPublic": false,
+    "defaultRunOptions": {
+        "build": "latest",
+        "memoryMbytes": 1024,
+        "timeoutSecs": 3600
+    },
+    "defaultRunOptions$comment": "Default 1 GB, from local runs on 2026-11-08 (engine branch platform/cutshort, SDK 4.2.1), to re-measure on Apify at 512 MB, 1 GB and 2 GB after the first push: a run is paced at 8 calls a second to Cutshort, so its time is set by the jobs it reads, not by CPU. 100 newest jobs 16 to 23 s with 2.7 to 3.3 s of CPU (CLI and Python start included) and a 272 MB peak; 2,000 jobs 284 s, 11.5 s of CPU, 270 MB. At 512 MB the start alone gets an eighth of a core, so 1 GB keeps the daily test fast at about the same cost. timeoutSecs 3600: the most a run reads when a number of jobs is asked for is 5,000 job pages, about 11 minutes; every match of a broad search can take longer (every one of Cutshort's 44,962 jobs: about 95 minutes).",
+    "pricing": {
+        "$comment": "2026-11-08. Rule: rules/SEO.md section 16. Main competitor: getascraper/cutshort-scraper, the most used Cutshort actor (266 users in 30 days): $0.0013 a job on FREE, $0.00119 BRONZE, $0.00108 SILVER, $0.00097 GOLD, plus a $0.00005 start; its full row includes the description, so job-details is the like-for-like event: $0.00115 / $0.00115 / $0.001035 / $0.00092 is 11.5% / 3.4% / 4.2% / 5.2% under it; job (no description) is $0.0011, 15% / 8% / 8% / 9% under. Others: memo23 $0.0018 + $0.05 start, thirdwatch $0.002 + $0.00005, themineworks $0.0018 + $0.005, seemuapps $0.004, rt-solutions $0.0015. No start fee: a run's cost follows the jobs it reads (100 jobs about 20 s at 1 GB, about 0.006 CU, about $0.0012 against $0.088 of developer revenue at FREE, 1.4%). The worst case is a search that Cutshort's own filters narrow to few rows: up to 5,000 job pages, about 11 minutes, about $0.04; watch paying runs for it. Gentle ladder per the owner's decision of 2026-10-29. Prices must be re-checked against the competitors on the push day.",
+        "apply": true,
+        "pricingInfos": [
+            {
+                "pricingModel": "PAY_PER_EVENT",
+                "reasonForChange": "First pricing",
+                "pricingPerEvent": {
+                    "actorChargeEvents": {
+                        "job": {
+                            "eventTitle": "Job",
+                            "eventDescription": "One saved job row: title, company, locations, remote or office, job type, pay as shown and as numbers, experience, skills, funding stage, company type and size, posting dates, job link. Also one checked job link that is closed or not found.",
+                            "isPrimaryEvent": true,
+                            "eventTieredPricingUsd": {
+                                "FREE": {
+                                    "tieredEventPriceUsd": 0.0011
+                                },
+                                "BRONZE": {
+                                    "tieredEventPriceUsd": 0.0011
+                                },
+                                "SILVER": {
+                                    "tieredEventPriceUsd": 0.00099
+                                },
+                                "GOLD": {
+                                    "tieredEventPriceUsd": 0.00088
+                                },
+                                "PLATINUM": {
+                                    "tieredEventPriceUsd": 0.00088
+                                },
+                                "DIAMOND": {
+                                    "tieredEventPriceUsd": 0.00088
+                                }
+                            }
+                        },
+                        "job-details": {
+                            "eventTitle": "Job with details",
+                            "eventDescription": "One saved job row with full details on: everything in a Job row plus the description as text and HTML, and the city and country of the first place.",
+                            "eventTieredPricingUsd": {
+                                "FREE": {
+                                    "tieredEventPriceUsd": 0.00115
+                                },
+                                "BRONZE": {
+                                    "tieredEventPriceUsd": 0.00115
+                                },
+                                "SILVER": {
+                                    "tieredEventPriceUsd": 0.001035
+                                },
+                                "GOLD": {
+                                    "tieredEventPriceUsd": 0.00092
+                                },
+                                "PLATINUM": {
+                                    "tieredEventPriceUsd": 0.00092
+                                },
+                                "DIAMOND": {
+                                    "tieredEventPriceUsd": 0.00092
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

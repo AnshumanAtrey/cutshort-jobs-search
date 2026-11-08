@@ -1,0 +1,249 @@
+{
+    "title": "Cutshort Jobs Search",
+    "description": "Type a job title and press Start: you get the newest matching jobs from every company hiring on Cutshort, India's tech and startup job site. Every other field is optional. Press Start with the form empty for the newest jobs of every kind.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchTerms": {
+            "title": "Job titles to find (searchTerms)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type the job titles to find, one per line, for example python developer. A job matches when its title has every word of a line: frontend also finds Front-End. Leave it empty to get the newest jobs of every kind. A pasted Cutshort link (a job list such as cutshort.io/jobs/python-jobs-in-pune, or a job) works too.",
+            "placeholderValue": "python developer",
+            "example": [
+                "python developer"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "location": {
+            "title": "Where the job is (location)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type where the job is: a city, state or country, one per line, for example Bangalore, Pune or Mumbai. Cutshort writes Bangalore as Bengaluru (Bangalore), and Gurgaon also finds Gurugram. India finds every job in India, remote-only ones included. Remote here asks for remote jobs. Leave it empty for anywhere.",
+            "placeholderValue": "Bangalore",
+            "example": [
+                "Bangalore"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "workType": {
+            "title": "Remote or office (workType)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick remote, hybrid or onsite, or several. Cutshort marks each job remote only (remote), remote friendly, which can be done remotely or from the office it names (hybrid), or neither (onsite). Leave it empty for all of them. Typed words such as wfh or office work too.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "remote",
+                    "hybrid",
+                    "onsite"
+                ],
+                "enumTitles": [
+                    "Remote only (remote)",
+                    "Remote friendly (hybrid)",
+                    "Office only (onsite)"
+                ]
+            },
+            "example": [
+                "remote"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "postedWithin": {
+            "title": "Posted in the last (postedWithin)",
+            "type": "string",
+            "editor": "select",
+            "description": "Pick how new the jobs must be: posted in the last 24 hours, 3 days, 7 days or 30 days. Any time, the default, keeps every open job, newest first. The date is the one Cutshort's job lists show: when the job was posted, or reopened. You can also type your own period, such as 48 hours or 2 weeks.",
+            "enumSuggestedValues": [
+                "24 hours",
+                "3 days",
+                "7 days",
+                "30 days",
+                "any time"
+            ],
+            "enumTitles": [
+                "24 hours",
+                "3 days",
+                "7 days",
+                "30 days",
+                "any time"
+            ],
+            "example": "7 days",
+            "default": "any time",
+            "nullable": true
+        },
+        "maxJobs": {
+            "title": "Number of jobs (maxJobs)",
+            "type": "integer",
+            "editor": "number",
+            "unit": "jobs",
+            "description": "Type how many jobs to get, newest first: 100 by default. Type 0 to get every matching job. Each job is one charged row, so this sets the most a run can cost.",
+            "prefill": 100,
+            "example": 100,
+            "default": 100,
+            "sectionCaption": "How many and how much",
+            "nullable": true
+        },
+        "includeDetails": {
+            "title": "Full details (includeDetails)",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Tick to add the full job description, as text and HTML, and the city and country of the first place. Every row already has the skills, experience, pay and company details. A job with details costs $1.15 per 1,000 instead of $1.10.",
+            "default": false,
+            "nullable": true
+        },
+        "skills": {
+            "title": "Skills or roles (skills)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type the skills or roles a job must ask for, one per line, for example python, react or devops. A job matches when one of its skills, or its title, has every word of a line: react finds React.js and golang finds Go Programming (Golang). Several lines find jobs with any of them. A pasted Cutshort job list link such as cutshort.io/jobs/python-jobs works too.",
+            "placeholderValue": "python",
+            "example": [
+                "python"
+            ],
+            "default": [],
+            "sectionCaption": "Skills, experience, pay",
+            "nullable": true
+        },
+        "experienceYears": {
+            "title": "Experience (experienceYears)",
+            "type": "integer",
+            "editor": "number",
+            "unit": "years",
+            "description": "Type your years of experience, for example 3: you get the jobs whose experience range includes it (a job for 2 - 6 years matches 3). Type 0 for jobs open to freshers. Leave it empty for every experience level.",
+            "example": 3,
+            "nullable": true
+        },
+        "minSalaryLakhs": {
+            "title": "Salary from (minSalaryLakhs)",
+            "type": "integer",
+            "editor": "number",
+            "unit": "lakhs a year",
+            "description": "Type the lowest salary you want, in lakhs a year: 12 means 12 lakh rupees a year (12 LPA). You get the jobs whose pay reaches it; a monthly stipend counts twelve times. Jobs that hide their pay (Cutshort shows Best in industry) are left out once you set it. Leave it empty to keep every job.",
+            "example": 12,
+            "nullable": true
+        },
+        "companyStage": {
+            "title": "Funding stage (companyStage)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick the hiring company's funding stage: bootstrapped, funded (it raised funding) or profitable, or several. A job whose company shows no stage is left out once you pick one. Leave it empty for every company.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "bootstrapped",
+                    "funded",
+                    "profitable"
+                ],
+                "enumTitles": [
+                    "Bootstrapped",
+                    "Raised funding (funded)",
+                    "Profitable"
+                ]
+            },
+            "example": [
+                "funded"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "companyType": {
+            "title": "Company type (companyType)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick the company type: product companies, services companies (IT services, consulting, agencies), or both. A company that does both counts as each. A job whose company shows no type is left out once you pick one. Leave it empty for every company.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "product",
+                    "services"
+                ],
+                "enumTitles": [
+                    "Product company (product)",
+                    "Services company (services)"
+                ]
+            },
+            "example": [
+                "product"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "excludeAgencies": {
+            "title": "No agency jobs (excludeAgencies)",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Tick to leave out the jobs a recruitment or staffing agency posted for a client. Such a job names the client as its company and the agency in agency.",
+            "default": false,
+            "nullable": true
+        },
+        "excludeTerms": {
+            "title": "Leave out words (excludeTerms)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type words that leave a job out when its title has them, one per line, for example senior or intern. Leave it empty to keep every job.",
+            "placeholderValue": "senior",
+            "example": [
+                "senior"
+            ],
+            "default": [],
+            "sectionCaption": "Narrow the search",
+            "nullable": true
+        },
+        "employmentType": {
+            "title": "Job type (employmentType)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick the job type: full-time or internship. Cutshort has these two job types only, and its full time also covers contract roles, so contract, part-time or temporary typed here find nothing. Leave it empty for both.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "full-time",
+                    "intern"
+                ],
+                "enumTitles": [
+                    "Full-time",
+                    "Internship (intern)"
+                ]
+            },
+            "example": [
+                "full-time"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "searchDescriptions": {
+            "title": "Match descriptions (searchDescriptions)",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Tick to match your job title words in the job description too, not only the title: kubernetes then finds every job that mentions Kubernetes. The run then reads every job, newest first, so it is slower: about 2 minutes per 1,000 jobs read.",
+            "default": false,
+            "nullable": true
+        },
+        "companies": {
+            "title": "Only these companies (companies)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type company names to search only them, one per line: a name (Egnyte) or a Cutshort company link (cutshort.io/company/egnyte-SClW7oZH). Each company's open jobs are read. Leave it empty to search every company.",
+            "placeholderValue": "Egnyte",
+            "example": [
+                "Egnyte"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "jobUrls": {
+            "title": "Job links to check (jobUrls)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Paste Cutshort job links to check whether they are still open, one per line, instead of searching. Each link comes back open with the job, closed (the company closed or deleted it) or not found.",
+            "placeholderValue": "https://cutshort.io/job/Sr-Backend-Engineering-Manager-Egnyte-koBBDTQ1",
+            "default": [],
+            "sectionCaption": "Check job links",
+            "nullable": true
+        }
+    }
+}
