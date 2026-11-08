@@ -13,13 +13,13 @@
     "isPublic": false,
     "defaultRunOptions": {
         "build": "latest",
-        "memoryMbytes": 1024,
+        "memoryMbytes": 512,
         "timeoutSecs": 3600
     },
-    "defaultRunOptions$comment": "Default 1 GB, from local runs on 2026-11-08 (engine branch platform/cutshort, SDK 4.2.1), to re-measure on Apify at 512 MB, 1 GB and 2 GB after the first push: a run is paced at 8 calls a second to Cutshort, so its time is set by the jobs it reads, not by CPU. 100 newest jobs 16 to 23 s with 2.7 to 3.3 s of CPU (CLI and Python start included) and a 272 MB peak; 2,000 jobs 284 s, 11.5 s of CPU, 270 MB. At 512 MB the start alone gets an eighth of a core, so 1 GB keeps the daily test fast at about the same cost. timeoutSecs 3600: the most a run reads when a number of jobs is asked for is 5,000 job pages, about 11 minutes; every match of a broad search can take longer (every one of Cutshort's 44,962 jobs: about 95 minutes).",
+    "defaultRunOptions$comment": "Default 512 MB, measured on Apify on 2026-11-08 (build 1.0.2, engine v0.5.2): the example input (python developer, 100 jobs) took 43.5 s at 512 MB (0.0060 CU, $0.00189 at FREE prices), 34.7 s at 1 GB (0.0096 CU, $0.00260) and 18.8 s at 2 GB (0.0105 CU, $0.00277). 512 MB is the cheapest, and a run that reads many job pages is paced by Cutshort (about 7 pages a second at any memory: 5,000 pages in 712 s), so it costs in proportion to the memory; the start event charges once up to 1 GB, so 512 MB and 1 GB pay the same start. Peak memory of every measured run: 82 to 127 MB. timeoutSecs 3600: the most a run reads when a number of jobs is asked for is 5,000 job pages, about 12 minutes; every match of a broad search can take longer (every one of Cutshort's 44,962 jobs: about 100 to 110 minutes).",
     "pricing": {
-        "$comment": "2026-11-08, round 2 (BRIEF-2.md): apply is false for the first deploy, so the measuring runs on Apify run unpriced and their cost is the platform's alone; the prices below are round 1's and are replaced by the tiered prices computed from those runs (owner's markup ladder, BRIEF-2.md section 4), which then go in as the Actor's first pricing with apply true. isPublic stays false until the owner's final check. Round 1 (house rule): 2026-11-08. Rule: rules/SEO.md section 16. Main competitor: getascraper/cutshort-scraper, the most used Cutshort actor (266 users in 30 days): $0.0013 a job on FREE, $0.00119 BRONZE, $0.00108 SILVER, $0.00097 GOLD, plus a $0.00005 start; its full row includes the description, so job-details is the like-for-like event: $0.00115 / $0.00115 / $0.001035 / $0.00092 is 11.5% / 3.4% / 4.2% / 5.2% under it; job (no description) is $0.0011, 15% / 8% / 8% / 9% under. Others: memo23 $0.0018 + $0.05 start, thirdwatch $0.002 + $0.00005, themineworks $0.0018 + $0.005, seemuapps $0.004, rt-solutions $0.0015. No start fee: a run's cost follows the jobs it reads (100 jobs about 20 s at 1 GB, about 0.006 CU, about $0.0012 against $0.088 of developer revenue at FREE, 1.4%). The worst case is a search that Cutshort's own filters narrow to few rows: up to 5,000 job pages, about 11 minutes, about $0.04; watch paying runs for it. Gentle ladder per the owner's decision of 2026-10-29. Prices must be re-checked against the competitors on the push day.",
-        "apply": false,
+        "$comment": "Priced from measured Apify runs (BRIEF-3.md section 3, owner, 2026-11-08: cost plus a 100-150% markup by tier, m = (0.8 x P - C) / C, FREE 150%, BRONZE 140%, SILVER 125%, GOLD 110%, PLATINUM and DIAMOND 100%, each price rounded up to 2 significant figures, none under $0.00001). Cost fit at 512 MB on cjWDGlvJ8yHuRbZXn, dm6j2TeQLNVwCLSx3, kUg4OdB52dNpHgksV, rDe9JHbniaK29a4lE, h6tzyNwwGFhIOWtrZ (https://docs.apify.com/platform/actors/publishing/monetize/pricing-and-costs.md unit prices; PLATINUM and DIAMOND at GOLD's): $0.0006863 a run + $0.000008574 a job + $0 more with details, at FREE. Ladder (price, markup): job FREE $0.000027 (152%), BRONZE $0.000026 (143%), SILVER $0.000021 (128%), GOLD $0.000017 (114%), PLATINUM $0.000016 (101%), DIAMOND $0.000016 (101%); job-details FREE $0.000027 (152%), BRONZE $0.000026 (143%), SILVER $0.000021 (128%), GOLD $0.000017 (114%), PLATINUM $0.000016 (101%), DIAMOND $0.000016 (101%). Run start $0.053 flat per GB: $0.0022 would cover the fixed cost of a run ($0.00069 at FREE prices, 512 MB) at 150%; raised so every measured run type keeps 100% or more on every tier. The binding one reads the most one run reads, 5,000 job pages (remote React jobs, run zqy8EIvhBiA6CMDez, $0.0211 at FREE), checked as if it had saved no job: 101% on FREE and BRONZE; with its 74 rows 109%. The fresher search (1,050 pages, 100 rows) sits at 858% or more. Apify's free first 5 s with the event on is not counted. House rule for comparison (SEO.md 16, 5-15% under getascraper/cutshort-scraper, read 2026-11-08): job $0.00111, job-details $0.00113 on FREE and BRONZE, 10% less on SILVER, 20% less on GOLD and up.",
+        "apply": true,
         "pricingInfos": [
             {
                 "pricingModel": "PAY_PER_EVENT",
@@ -32,22 +32,22 @@
                             "isPrimaryEvent": true,
                             "eventTieredPricingUsd": {
                                 "FREE": {
-                                    "tieredEventPriceUsd": 0.0011
+                                    "tieredEventPriceUsd": 2.7e-05
                                 },
                                 "BRONZE": {
-                                    "tieredEventPriceUsd": 0.0011
+                                    "tieredEventPriceUsd": 2.6e-05
                                 },
                                 "SILVER": {
-                                    "tieredEventPriceUsd": 0.00099
+                                    "tieredEventPriceUsd": 2.1e-05
                                 },
                                 "GOLD": {
-                                    "tieredEventPriceUsd": 0.00088
+                                    "tieredEventPriceUsd": 1.7e-05
                                 },
                                 "PLATINUM": {
-                                    "tieredEventPriceUsd": 0.00088
+                                    "tieredEventPriceUsd": 1.6e-05
                                 },
                                 "DIAMOND": {
-                                    "tieredEventPriceUsd": 0.00088
+                                    "tieredEventPriceUsd": 1.6e-05
                                 }
                             }
                         },
@@ -56,24 +56,29 @@
                             "eventDescription": "One saved job row with full details on: everything in a Job row plus the description as text and HTML, and the city and country of the first place.",
                             "eventTieredPricingUsd": {
                                 "FREE": {
-                                    "tieredEventPriceUsd": 0.00115
+                                    "tieredEventPriceUsd": 2.7e-05
                                 },
                                 "BRONZE": {
-                                    "tieredEventPriceUsd": 0.00115
+                                    "tieredEventPriceUsd": 2.6e-05
                                 },
                                 "SILVER": {
-                                    "tieredEventPriceUsd": 0.001035
+                                    "tieredEventPriceUsd": 2.1e-05
                                 },
                                 "GOLD": {
-                                    "tieredEventPriceUsd": 0.00092
+                                    "tieredEventPriceUsd": 1.7e-05
                                 },
                                 "PLATINUM": {
-                                    "tieredEventPriceUsd": 0.00092
+                                    "tieredEventPriceUsd": 1.6e-05
                                 },
                                 "DIAMOND": {
-                                    "tieredEventPriceUsd": 0.00092
+                                    "tieredEventPriceUsd": 1.6e-05
                                 }
                             }
+                        },
+                        "apify-actor-start": {
+                            "eventTitle": "Run start",
+                            "eventDescription": "Charged by Apify when a run starts: once up to 1 GB of memory and once more for each extra GB, so $0.053 at the default 512 MB. It pays for the job pages a run reads, which a narrow search reads many of for few jobs.",
+                            "eventPriceUsd": 0.053
                         }
                     }
                 }

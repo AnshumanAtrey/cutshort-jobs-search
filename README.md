@@ -2,7 +2,7 @@
 
 Cutshort jobs scraper and API: search every live job on Cutshort (cutshort.io), India's hiring site for tech and startup jobs, by job title, skill, city, remote, years of experience and salary in lakhs, and get each job's title, company, city, remote or office, pay in INR (LPA), experience range, skills, funding stage, company type and size, posting date and link, newest first. Turn on full details for the job description.
 
-Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scraper for recruiting and salary research, or a daily feed of India startup jobs from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. Paste a Cutshort job list link such as cutshort.io/jobs/python-jobs-in-pune and it searches that list. Available as an [Apify Actor](https://apify.com/anshumanatrey/cutshort-jobs-search). $0.0011 per job, $0.00115 with the full description, no run fee, no login.
+Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scraper for recruiting and salary research, or a daily feed of India startup jobs from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. Paste a Cutshort job list link such as cutshort.io/jobs/python-jobs-in-pune and it searches that list. Available as an [Apify Actor](https://apify.com/anshumanatrey/cutshort-jobs-search). $0.000027 per job with or without the full description, a $0.053 run start, no login.
 
 ## What does it do?
 
@@ -21,7 +21,7 @@ Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scrap
 - **The posting date on every job, and a date filter that works.** Every row has the date Cutshort's job lists show (the same to the minute on 148 of 148 jobs compared), so Posted in the last 24 hours works on every search. The job page's own date, which moves forward while a company is still hiring, is a second field.
 - **Remote, said the way Cutshort says it.** Cutshort marks jobs remote only, remote friendly or office only; they come back as remote, hybrid and onsite, with Cutshort's own words beside them.
 - **Agency jobs named.** When a recruitment agency posts for a client, the row names the client as the company and the agency in its own field, and one tick leaves agency jobs out.
-- **You pay for what you get.** One charge per delivered row, no run fee, and a spending limit stops the run cleanly with the jobs it paid for.
+- **You pay for what you get.** One charge per delivered row plus a $0.053 run start, and a spending limit stops the run cleanly with the jobs it paid for.
 
 ## When should I use it?
 
@@ -33,22 +33,23 @@ Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scrap
 
 ## How much does it cost to scrape Cutshort jobs?
 
-Pay per event: $1.10 per 1,000 jobs, or $1.15 per 1,000 with the full description. No run fee, no monthly fee, and platform usage is included. Apify's free $5 monthly credit covers about 4,500 jobs.
+Pay per event: $0.027 per 1,000 jobs, with or without the full description, and $0.053 when a run starts. No monthly fee, and platform usage is included. Apify's free $5 monthly credit covers about 89 runs of 100 jobs.
 
 | Event | Price | When it is charged |
 |---|---|---|
-| Job | $0.0011 | One saved job, and one checked link that is closed or not found |
-| Job with details | $0.00115 | One saved job with full details on |
+| Job | $0.000027 | One saved job, and one checked link that is closed or not found |
+| Job with details | $0.000027 | One saved job with full details on |
+| Run start | $0.053 | Once when a run starts, and once more for each GB of memory above 1 GB |
 
-Cutshort Jobs Scraper's Apify Store header, "from $0.88 / 1,000 jobs", shows the lowest discount-tier price: the GOLD price. FREE and BRONZE users (Apify's Free and Starter plans) pay the base price in the table, $0.0011 a job and $0.00115 with details; SILVER (Scale) pays 10% less, $0.00099 and $0.001035; GOLD (Business) and above pay 20% less, $0.00088 and $0.00092.
+The "from" price in Cutshort Jobs Scraper's Apify Store header is the lowest discount-tier price, the GOLD price: $0.017 per 1,000 jobs, without the run start. FREE users (Apify's Free plan) pay $0.000027 a job, BRONZE (Starter) $0.000026, SILVER (Scale) $0.000021, GOLD (Business) $0.000017, and PLATINUM and DIAMOND $0.000016, with or without details. The run start, $0.053, is the same on every plan and is most of the price of a small run: it pays for the job pages a run reads, and a narrow search (one skill, remote only) reads thousands of them for a few dozen jobs.
 
-| Run (Free and Starter price) | Cost |
+| Run (Free plan price, run start included) | Cost |
 |---|---|
-| 100 newest jobs | $0.11 |
-| 100 jobs with full descriptions | $0.115 |
-| 1,000 jobs | $1.10 |
-| Every Python Developer job, 632 on 2026-11-08 (96 s) | $0.70 |
-| Every job Cutshort lists, 44,962 on 2026-11-08 (about 95 minutes: raise the run timeout) | $49.46 |
+| 100 newest jobs | $0.056 |
+| 100 jobs with full descriptions | $0.056 |
+| 1,000 jobs | $0.08 |
+| Every Python Developer job, 632 on 2026-11-08 | $0.07 |
+| Every job Cutshort lists, 44,962 on 2026-11-08 (about 100 to 110 minutes: raise the run timeout) | $1.27 |
 
 Number of jobs (`maxJobs`) sets the most a run can cost, and a run stops at its spending limit with a message saying so.
 
@@ -63,9 +64,9 @@ Every actor on the Apify Store that names Cutshort in its title or slug and had 
 | seemuapps/india-tech-jobs-scraper | 25 | $0.004 | none | Instahyre, Cutshort and Foundit in one run |
 | thirdwatch/cutshort-jobs-scraper | 9 | $0.002 | $0.00005 | Skills |
 | rt-solutions/india-tech-jobs-scraper | 6 | $0.0015 | none | Instahyre, Hirist and Cutshort in one run |
-| This actor | new | $0.0011, $0.00115 with details | none | Title, skill, city, experience, salary, funding stage, every job, live |
+| This actor | new | $0.000027 | $0.053 | Title, skill, city, experience, salary, funding stage, every job, live |
 
-Where others are cheaper or do more: on paid plans getascraper's job drops to $0.00119 (Starter), $0.00108 (Scale) and $0.00097 (Business), close to this actor's $0.0011, $0.00099 and $0.00088. getascraper and memo23 also return the pay band Cutshort keeps but does not show on the job page, the name of the person who posted the job, an employer email found on the company's website, and a monitoring mode that returns only new and changed jobs; this actor returns the pay the job page shows and leaves people's names out. The multi-site actors cover two more Indian job sites in one run.
+Where others are cheaper or do more: getascraper's run start is $0.00005, so a run that saves fewer than 42 jobs costs less there; from 42 jobs up this actor costs less, and on paid plans getascraper's job is still $0.00119 (Starter), $0.00108 (Scale) and $0.00097 (Business) against $0.000026, $0.000021 and $0.000017 here. getascraper and memo23 also return the pay band Cutshort keeps but does not show on the job page, the name of the person who posted the job, an employer email found on the company's website, and a monitoring mode that returns only new and changed jobs; this actor returns the pay the job page shows and leaves people's names out. The multi-site actors cover two more Indian job sites in one run.
 
 ## Which inputs does it take?
 
@@ -159,7 +160,7 @@ On the 2,000 newest jobs (2026-11-08) these fields were filled: title, company, 
 
 ## How fast is it?
 
-About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 newest jobs in 16 to 23 s, python developer in 16 s, python developer in Bangalore in 19 s, and 2,000 jobs in 284 s (7 jobs a second). The run reads Cutshort's job index once, then each job's page at a steady 8 a second, so Cutshort keeps answering; a title or a town narrows which pages it reads. A skill is read through Cutshort's own list of that skill: python, 100 jobs in 23 s; golang, 100 jobs in 36 s. A search with several of Cutshort's own filters reads more jobs to find enough: backend jobs for 3 years of experience paying 15 lakhs at funded product companies read 1,247 jobs for 100 rows in 197 s.
+About 20 to 45 seconds for 100 jobs on Apify at the default 512 MB, measured on 2026-11-08: the 100 newest jobs in 21 s, python developer in 44 s (35 s at 1 GB, 19 s at 2 GB), python developer in Bangalore with 3 years in 36 s, sales or operations in Mumbai with full details in 24 s, and the 1,000 newest jobs in 142 s (7 jobs a second). The run reads Cutshort's job index once, then each job's page at a steady 8 a second, so Cutshort keeps answering; a title or a town narrows which pages it reads. A search that Cutshort's own filters narrow reads more jobs to find enough: fresher jobs read 1,050 jobs for 100 rows in 138 s, and remote React jobs read 5,000 jobs, the most one run reads, for 74 rows in 712 s.
 
 ## Common questions
 
@@ -189,11 +190,11 @@ Cutshort Jobs Scraper needs no login and no Cutshort API key: it reads the publi
 
 ### Does it work on Apify's free plan?
 
-Cutshort Jobs Scraper works on Apify's free plan at the base price: $0.0011 a job, with no run fee. The free $5 monthly credit pays for about 4,500 jobs, 100 newest jobs for $0.11.
+Cutshort Jobs Scraper works on Apify's free plan: $0.000027 a job and $0.053 a run start. The free $5 monthly credit pays for about 89 runs of the 100 newest jobs, $0.056 each.
 
 ### How often should I run it?
 
-Running Cutshort Jobs Scraper once a day keeps a job feed fresh: set Posted in the last (`postedWithin`) to 24 hours and Number of jobs (`maxJobs`) to 0 to get every job posted that day, about 30 to 40 a day in early November 2026, about $0.04 a run. Set the run up under Schedules in Apify Console, and match rows on `jobId` to skip jobs you already have.
+Running Cutshort Jobs Scraper once a day keeps a job feed fresh: set Posted in the last (`postedWithin`) to 24 hours and Number of jobs (`maxJobs`) to 0 to get every job posted that day, about 30 to 40 a day in early November 2026, about $0.054 a run. Set the run up under Schedules in Apify Console, and match rows on `jobId` to skip jobs you already have.
 
 ### How do I get every job of one company?
 
@@ -201,7 +202,7 @@ To get every open job of one company with Cutshort Jobs Scraper, type the compan
 
 ### How do I check a list of job links?
 
-Cutshort Jobs Scraper checks whether Cutshort job links are still open when you paste them into Job links to check (`jobUrls`), one per line, instead of searching. Each link comes back as one row: open with the job's fields, closed (the company closed or deleted it) or not found. 10 links cost $0.011.
+Cutshort Jobs Scraper checks whether Cutshort job links are still open when you paste them into Job links to check (`jobUrls`), one per line, instead of searching. Each link comes back as one row: open with the job's fields, closed (the company closed or deleted it) or not found. 10 links cost $0.053.
 
 ### How do I call it from the API, Python, JavaScript, n8n or an AI agent?
 
@@ -253,7 +254,7 @@ Cutshort Jobs Scraper reads public job postings and leaves out the people who po
 ## Limitations
 
 - Cutshort keeps every job open until its company closes it, so its index reaches back to 2015: of 44,962 open jobs on 2026-11-08, about 8,500 were posted in the last 12 months. Newest first keeps old ones last, and Posted in the last leaves them out.
-- A search reads each job's page at 8 a second, so a search that many filters narrow reads many jobs: up to 5,000 in one run (about 11 minutes) when a number of jobs is asked for, and the message says how far back it read.
+- A search reads each job's page at 8 a second, so a search that many filters narrow reads many jobs: up to 5,000 in one run (about 12 minutes on Apify at 512 MB) when a number of jobs is asked for, and the message says how far back it read.
 - Pay is the pay the job page shows: 11% of jobs hide it (Best in industry), and the band Cutshort keeps but does not show is not returned.
 - Funding stage, company type and size exist only where the company filled them in (64% to 72% of jobs); a filter on them leaves the rest out.
 - Cutshort's job types are full time, which it also uses for contract roles, and internship.

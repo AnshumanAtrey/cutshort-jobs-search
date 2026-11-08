@@ -43,24 +43,25 @@ Source: https://github.com/AnshumanAtrey/cutshort-jobs-search
 
 ## Pricing
 
-PAY_PER_EVENT model, platform usage included, no run fee:
+PAY_PER_EVENT model, platform usage included:
 
-- Job: $0.0011 per saved job ($1.10 per 1,000), and per checked link that is closed or not found
-- Job with details: $0.00115 per saved job with full details on ($1.15 per 1,000)
+- Job: $0.000027 per saved job ($0.027 per 1,000), and per checked link that is closed or not found
+- Job with details: $0.000027 per saved job with full details on ($0.027 per 1,000)
+- Run start: $0.053 once when a run starts, and once more for each GB of memory above 1 GB
 
-Cutshort Jobs Scraper's Apify Store header, "from $0.88 / 1,000 jobs", shows the lowest discount-tier price: the GOLD price. FREE and BRONZE users (Apify's Free and Starter plans) pay the base prices above, $0.0011 a job and $0.00115 with details; SILVER (Scale) pays 10% less, $0.00099 and $0.001035; GOLD (Business) and above pay 20% less, $0.00088 and $0.00092.
+The "from" price in Cutshort Jobs Scraper's Apify Store header is the lowest discount-tier price, the GOLD price: $0.017 per 1,000 jobs, without the run start. FREE users (Apify's Free plan) pay $0.000027 a job, BRONZE (Starter) $0.000026, SILVER (Scale) $0.000021, GOLD (Business) $0.000017, and PLATINUM and DIAMOND $0.000016, with or without details. The run start, $0.053, is the same on every plan and is most of the price of a small run: it pays for the job pages a run reads, and a narrow search (one skill, remote only) reads thousands of them for a few dozen jobs.
 
-Typical costs (Free and Starter price):
+Typical costs (Free plan price, run start included):
 
-- 100 newest jobs: $0.11
-- 100 jobs with full descriptions: $0.115
-- 1,000 jobs: $1.10
+- 100 newest jobs: $0.056
+- 100 jobs with full descriptions: $0.056
+- 1,000 jobs: $0.08
 
-Apify's free $5 monthly credit covers about 4,500 jobs.
+Apify's free $5 monthly credit covers about 89 runs of 100 jobs.
 
 ## Speed
 
-About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 newest jobs in 16 to 23 s, python developer in 16 s, and 2,000 jobs in 284 s (7 jobs a second). A skill is read through Cutshort's list of that skill: golang, 100 jobs in 36 s. A search that several of Cutshort's own filters narrow reads more jobs: up to 5,000 in one run.
+About 20 to 45 seconds for 100 jobs on Apify at the default 512 MB (2026-11-08): the 100 newest jobs in 21 s, python developer in 44 s (19 s at 2 GB), and the 1,000 newest jobs in 142 s (7 jobs a second). A search that several of Cutshort's own filters narrow reads more jobs: up to 5,000 in one run (remote React jobs: 5,000 read for 74 rows in 712 s).
 
 ## How to call it
 
@@ -81,7 +82,7 @@ About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 new
 
 - The user needs the pay band Cutshort keeps but does not show, or the name of the person who posted a job: this actor returns what the job page shows and leaves people out.
 - The user needs jobs from other Indian job sites in one run: use a multi-site actor or the sibling actors for each site.
-- The user needs every one of Cutshort's 44,962 jobs often: a full read takes about 95 minutes at the pace Cutshort answers.
+- The user needs every one of Cutshort's 44,962 jobs often: a full read takes about 100 to 110 minutes at the pace Cutshort answers.
 
 ## Sample input
 
@@ -128,8 +129,8 @@ About 15 to 25 seconds for 100 jobs, measured locally on 2026-11-08: the 100 new
 
 ## Differentiators vs alternatives
 
-- vs getascraper/cutshort-scraper (266 users in 30 days): searches every job by title instead of one skill page's newest 400, filters by experience, salary and funding stage, and its posting-date filter works on every search; it costs $0.0011 a job against $0.0013 on the free plan.
-- vs memo23/cutshort-jobs-scraper: no $0.05 run fee, $0.0011 a job against $0.0018, and the same live title search.
+- vs getascraper/cutshort-scraper (266 users in 30 days): searches every job by title instead of one skill page's newest 400, filters by experience, salary and funding stage, and its posting-date filter works on every search; it costs $0.000027 a job and a $0.053 run start against $0.0013 a job and $0.00005 on the free plan.
+- vs memo23/cutshort-jobs-scraper: a $0.053 run start against $0.05, $0.000027 a job against $0.0018, and the same live title search.
 - vs multi-site India job actors: deeper Cutshort fields (skills, experience, funding stage, company type and size) and every Cutshort job.
 
 ## Documentation
