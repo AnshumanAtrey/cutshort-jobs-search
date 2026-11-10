@@ -1,5 +1,5 @@
 {
-    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. options follow defaultRunOptions in store.json.",
+    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. options follow defaultRunOptions in store.json. Tasks marked publish false stay saved but off the Store: the account publishes at most 100 pages across all actors, so each actor keeps 2 or more by its earnings and search traffic (2026-11-11).",
     "options": {
         "build": "latest",
         "memoryMbytes": 1024,
@@ -8,6 +8,7 @@
     "tasks": [
         {
             "name": "cutshort-jobs-last-24-hours",
+            "publish": false,
             "title": "Find the newest Cutshort jobs posted in the last 24 hours",
             "description": "Get the 100 newest jobs first posted on Cutshort in the last day, with the company, city, pay in lakhs, experience asked for, skills and link. Set Number of jobs to 0 to get every one, and schedule it daily for a fresh feed of India tech and startup jobs.",
             "input": {
@@ -74,6 +75,7 @@
         },
         {
             "name": "python-developer-jobs-bangalore-cutshort",
+            "publish": false,
             "title": "Find python developer jobs in Bangalore on Cutshort",
             "description": "Get the newest python developer jobs in Bengaluru (Bangalore) on Cutshort, with the company, pay in lakhs, the experience asked for, skills and link.",
             "input": {
@@ -110,6 +112,7 @@
         },
         {
             "name": "react-jobs-on-cutshort",
+            "publish": false,
             "title": "Find every Cutshort job that asks for React",
             "description": "Get the newest jobs on Cutshort that list React as a skill or name it in the title, with pay in lakhs, experience, company and link.",
             "input": {
@@ -144,6 +147,7 @@
         },
         {
             "name": "fresher-jobs-on-cutshort",
+            "publish": false,
             "title": "Find fresher and entry-level jobs on Cutshort",
             "description": "Get the newest Cutshort jobs open to freshers (0 years of experience, typed as fresher), with the company, city, pay in lakhs or stipend, skills and link.",
             "input": {
@@ -177,6 +181,7 @@
         },
         {
             "name": "internships-on-cutshort",
+            "publish": false,
             "title": "Find internships on Cutshort",
             "description": "Get the newest internships on Cutshort, with the company, city, monthly stipend, skills and link.",
             "input": {
@@ -246,6 +251,7 @@
         },
         {
             "name": "product-company-jobs-pune",
+            "publish": false,
             "title": "Find product company jobs in Pune on Cutshort",
             "description": "Get the newest jobs at product companies in Pune on Cutshort, with pay in lakhs, experience, skills, funding stage and link.",
             "input": {
@@ -281,6 +287,7 @@
         },
         {
             "name": "cutshort-jobs-with-descriptions",
+            "publish": false,
             "title": "Get Cutshort jobs with full descriptions",
             "description": "Get the newest Cutshort jobs with the full description as text and HTML, plus skills, experience, pay in lakhs, funding stage and link.",
             "input": {
