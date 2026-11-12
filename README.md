@@ -4,6 +4,13 @@ Cutshort jobs scraper and API: search every live job on Cutshort (cutshort.io), 
 
 Use it as a Cutshort API with no login or Cutshort API key, a Cutshort job scraper for recruiting and salary research, or a daily feed of India startup jobs from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. Paste a Cutshort job list link such as cutshort.io/jobs/python-jobs-in-pune and it searches that list. Available as an [Apify Actor](https://apify.com/anshumanatrey/cutshort-jobs-search). $0.000027 per job with or without the full description, a $0.053 run start, no login.
 
+**Use it from an AI assistant:**
+
+- **Claude** (claude.ai and the desktop app): [Add Cutshort Jobs to Claude](https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Cutshort%20Jobs&connectorUrl=https%3A%2F%2Fmcp.apify.com%3Ftools%3Danshumanatrey%2Fcutshort-jobs-search), click Continue, sign in to Apify, Allow, and ask in plain words.
+- **Claude Code:** `claude mcp add --transport http cutshort-jobs-search "https://mcp.apify.com?tools=anshumanatrey/cutshort-jobs-search"`, then run `/mcp` to sign in to Apify.
+- **Codex:** `codex mcp add cutshort-jobs-search --url "https://mcp.apify.com?tools=anshumanatrey/cutshort-jobs-search"`, then `codex mcp login cutshort-jobs-search`.
+- **Any other MCP client:** `https://mcp.apify.com?tools=anshumanatrey/cutshort-jobs-search`, signed in with Apify or an `Authorization: Bearer <APIFY_TOKEN>` header.
+
 ## What does it do?
 
 - **Searches every live job on Cutshort at once.** Cutshort listed 44,962 open jobs on 2026-11-08, about 1,100 of them first posted in the last 30 days and about 8,500 in the last 12 months, at employers such as Egnyte, Tracxn, MediBuddy, Wissen Technology and Asha Health (YC F24), mostly in Bengaluru, Hyderabad, Pune, Mumbai, Gurugram and remote.
